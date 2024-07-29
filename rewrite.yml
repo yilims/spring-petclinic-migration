@@ -1,0 +1,30 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.microsoft.azure.migration.AWSS3ToAzureBlob
+displayName: Change code from AWS S3 SDK to Azure Blob Storage SDK
+recipeList:
+  - org.openrewrite.java.spring.DeleteSpringProperty:
+      propertyKey: spring.cloud.aws.credentials.access-key
+  - org.openrewrite.java.spring.DeleteSpringProperty:
+      propertyKey: spring.cloud.aws.credentials.secret-key
+  - org.openrewrite.java.spring.DeleteSpringProperty:
+      propertyKey: spring.cloud.aws.region.static
+  - org.openrewrite.java.spring.AddSpringProperty:
+      property: azure.storage.connection-string
+      value: <your azure storage connection string>
+  - org.openrewrite.java.spring.AddSpringProperty:
+      property: azure.storage.container-name
+      value: <your azure storage container name>
+  - org.openrewrite.maven.ChangeDependencyGroupIdAndArtifactId:
+      oldGroupId: io.awspring.cloud
+      oldArtifactId: spring-cloud-aws-starter-s3
+      newGroupId: com.azure.spring
+      newArtifactId: spring-cloud-azure-starter-storage-blob
+  - org.openrewrite.maven.RemoveManagedDependency:
+      groupId: io.awspring.cloud
+      artifactId: spring-cloud-aws-dependencies
+  - org.openrewrite.maven.AddManagedDependency:
+      groupId: com.azure.spring
+      artifactId: spring-cloud-azure-dependencies
+      version: 4.19.0
+      scope: import
+      type: pom
