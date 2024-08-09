@@ -36,17 +36,6 @@
     <spring-format.version>0.0.40</spring-format.version>
 
   </properties>
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>io.awspring.cloud</groupId>
-        <artifactId>spring-cloud-aws-dependencies</artifactId>
-        <version>3.1.1</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
 
   <dependencies>
     <!-- Spring and Spring Boot dependencies -->
@@ -117,12 +106,6 @@
       <groupId>org.webjars.npm</groupId>
       <artifactId>font-awesome</artifactId>
       <version>${webjars-font-awesome.version}</version>
-    </dependency>
-
-    <!-- AWS SDK -->
-    <dependency>
-      <groupId>io.awspring.cloud</groupId>
-      <artifactId>spring-cloud-aws-starter-s3</artifactId>
     </dependency>
     
     <dependency>
